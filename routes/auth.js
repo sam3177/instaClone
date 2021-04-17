@@ -2,12 +2,25 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { jwtSecret } = require('../config/keys');
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
 
+const {
+	jwtSecret,
+	API_key
+} = require('../config/keys');
 const requireLogin = require('../middlewares/requireLogin');
 
 const router = express.Router();
 const User = mongoose.model('User');
+
+const transporter = nodemailer.createTransport(
+	sendgridTransport({
+		auth : {
+			api_key : API_key
+		}
+	})
+);
 
 // GET signup form
 router.get('/signup', (req, res) => {
@@ -44,7 +57,13 @@ router.post('/signup', async (req, res) => {
 		password : cryptedPass
 	});
 	await user.save();
-	res.send('success POST');
+	transporter.sendMail({
+		to: email,
+		from:'no_reply@insta.com',
+		subject:'signup success',
+		html:`<h1> Well done, ${name}!</h1><br><h5> Welcome to instagram!</h5>`
+	})
+	res.send('signup success');
 });
 
 //GET login form
