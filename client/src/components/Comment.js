@@ -7,26 +7,26 @@ const Comment = (props) => {
 	const { state } = useContext(UserContext);
 
 	const { _id, text, name, avatar, likes } = props;
-	const likeControl = (option) => {
-		console.log('like');
-		axios
-			.put(
-				`/post/${_id}/${option}`,
-				{ like: 'like' },
-				{
-					headers : {
-						Authorization :
-							'Bearer ' +
-							localStorage.getItem('token')
-					}
-				}
-			)
-			.then((response) => {
-				console.log(response);
-				setPost(response.data.result);
-			})
-			.catch((err) => console.log(err));
-	};
+	// const likeControl = (option) => {
+	// 	console.log('like');
+	// 	axios
+	// 		.put(
+	// 			`/post/${_id}/${option}`,
+	// 			{ like: 'like' },
+	// 			{
+	// 				headers : {
+	// 					Authorization :
+	// 						'Bearer ' +
+	// 						localStorage.getItem('token')
+	// 				}
+	// 			}
+	// 		)
+	// 		.then((response) => {
+	// 			console.log(response);
+	// 			// setPost(response.data.result);
+	// 		})
+	// 		.catch((err) => console.log(err));
+	// };
 	return (
 		<div className="comment">
 			<div className="">
@@ -46,8 +46,8 @@ const Comment = (props) => {
 			{
 						likes.includes(state._id) ? <button
 							className="like-btn"
-							onClick={() =>
-								likeControl('dislike')}
+							// onClick={() =>
+							// 	likeControl('dislike')}
 						>
 							<i className="material-icons like">
 								favorite
@@ -55,7 +55,7 @@ const Comment = (props) => {
 						</button> :
 						<button
 							className="like-btn"
-							onClick={() => likeControl('like')}
+							// onClick={() => likeControl('like')}
 						>
 							<i className="material-icons like">
 								favorite_border
