@@ -6,6 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { UserProvider } from './contexts/UserContext';
 
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+TimeAgo.addDefaultLocale(en)
+
 ReactDOM.render(
 	<BrowserRouter>
 		<UserProvider>

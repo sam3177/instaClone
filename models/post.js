@@ -22,19 +22,14 @@ const postSchema = new mongoose.Schema({
 	],
 	comments : [
 		{
-			text     : {
-				type     : String,
-				required : true
-			},
-			postedBy : {
-				type : ObjectId,
-				ref  : 'User'
-			}
+			type : ObjectId,
+			ref  : 'Comment'
 		}
 	],
 	postedBy : {
 		type : ObjectId,
 		ref  : 'User'
-	}
+	},
+	postedOn: Date
 });
 mongoose.model('Post', postSchema);

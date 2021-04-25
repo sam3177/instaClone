@@ -4,27 +4,36 @@ const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const router = express.Router();
 const Post = mongoose.model('Post');
+const Comment = mongoose.model('Comment');
 
+
+//PUT add comment thru post
 router.put(
 	'/post/:id/comment_add',
 	requireLogin,
-	(req, res) => {
-		const comment = {
+	async (req, res) => {
+		const comment = new Comment({
 			text     : req.body.text,
-			postedBy : req.user._id
-		};
+			postedBy : req.user._id,
+			postedOn: Date.now()
+		});
+		await comment.save();
+		console.log('comment saved')
 		Post.findByIdAndUpdate(
 			req.params.id,
 			{
-				$push : { comments: comment }
+				$push : {comments:comment._id}
 			},
 			{ new: true }
 		)
-			.populate('comments.postedBy', '_id name avatar')
+		.populate('postedBy', '_id name avatar')
 			.exec((error, result) => {
-				if (error) res.send({ error });
+				if (error) {
+					console.log(error)
+					res.send({ error });
+				}
 				else {
-					// console.log(result);
+					console.log(result);
 					res.json({
 						result,
 						message : 'comment added'
@@ -59,6 +68,25 @@ router.put(
 						message : 'comment added'
 					});
 				}
+			});
+	}
+);
+
+//GET find comment by id
+router.get(
+	'/comment/:id',
+	requireLogin,
+	(req, res) => {
+		console.log(req.params.id)
+		Comment.findById(req.params.id)
+			.populate('postedBy', '_id name avatar')
+			.then((comment) => {
+				console.log(comment);
+				res.send(comment);
+			})
+			.catch((error) => {
+				console.log(error);
+				res.send(error);
 			});
 	}
 );

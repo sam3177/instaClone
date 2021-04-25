@@ -13,7 +13,6 @@ router.get(
 	requireLogin,
 	(req, res) => {
 		Post.find()
-			.populate('comments.postedBy', '_id name avatar')
 			.populate('postedBy', '_id name avatar')
 			.exec((error, result) => {
 				if (error) res.send({ error });
@@ -53,6 +52,7 @@ router.get(
 	requireLogin,
 	(req, res) => {
 		Post.findById(req.params.id)
+		.populate('postedBy', '_id name avatar')
 			.then((post) => {
 				res.send(post);
 				// console.log(post);
@@ -144,7 +144,9 @@ router.put(
 				$push : { likes: req.user._id }
 			},
 			{ new: true }
-		).exec((error, result) => {
+		)
+		.populate('postedBy', '_id name avatar')
+		.exec((error, result) => {
 			if (error) res.send({ error });
 			else res.send({ result, message: 'liked' });
 		});
@@ -162,7 +164,9 @@ router.put(
 				$pull : { likes: req.user._id }
 			},
 			{ new: true }
-		).exec((error, result) => {
+		)
+		.populate('postedBy', '_id name avatar')
+		.exec((error, result) => {
 			if (error) res.send({ error });
 			else
 				res.send({

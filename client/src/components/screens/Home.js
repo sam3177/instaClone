@@ -5,7 +5,6 @@ import React, {
 // import axios from 'axios';
 
 import Post from '../Post';
-import Comment from '../Comment';
 
 const Home = () => {
 	const [ posts, setPosts ] = useState([]);
@@ -42,31 +41,12 @@ const Home = () => {
 	useEffect(() => {
 		renderPosts();
 	}, []);
-	
 
-	let postsR = posts.map((post) => {
-		const comms = post.comments.map((c) => (
-			<Comment
-				key={c._id}
-				_id={c._id}
-				text={c.text}
-				name={c.postedBy.name}
-				avatar={c.postedBy.avatar}
-			/>
-		));
-		return (
-			<Post
-				key={post._id}
-				data={{ ...post, postedBy: '' }}
-				postedBy={post.postedBy}
-				comms={comms}
-				renderPosts={renderPosts}
-			/>
-		);
-	});
 	return (
 		<div className="centered-container">
-			{postsR}
+			{posts.map((post) => (
+				<Post key={post._id} {...post} renderPosts={renderPosts} />
+			))}
 		</div>
 	);
 };
