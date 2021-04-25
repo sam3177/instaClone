@@ -76,7 +76,7 @@ transition: all 0.3s ease-in-out;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-
+  margin-right: 5px;
 }
 .profile-container{
   display:flex;
@@ -91,7 +91,9 @@ transition: all 0.3s ease-in-out;
   margin-left: 50px;
   margin-top: 10vh;
 }
-
+.comm-postedBy{
+  margin-right: 10px;
+}
 
 .gallery{
   display: flex;
@@ -134,8 +136,21 @@ margin:10px;
   padding:10px;
   padding-top:5px;
 }
-.post-sections, .comments{
-border-bottom: 1px solid rgba(124, 124, 124, 0.452);
+.post-sections{
+  border-bottom: 1px solid rgba(124, 124, 124, 0.452);
+}
+.comments{
+  margin-top:10px;
+  border-bottom: 1px solid rgba(124, 124, 124, 0.452);
+  max-height: 250px;
+  overflow:scroll;
+}
+.comments::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+.comment{
+  display:flex;
 }
 .hide{
   display: none;

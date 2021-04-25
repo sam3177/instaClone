@@ -93,7 +93,7 @@ const Login = () => {
 						<div className="input-field col s12">
 							<label>
 								Forgot your password?
-								<Link to="/tralala">
+								<Link to="/reset-password">
 									{' '}
 									Click here!
 								</Link>

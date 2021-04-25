@@ -42,6 +42,7 @@ const Home = () => {
 	useEffect(() => {
 		renderPosts();
 	}, []);
+	
 
 	let postsR = posts.map((post) => {
 		const comms = post.comments.map((c) => (
@@ -50,6 +51,7 @@ const Home = () => {
 				_id={c._id}
 				text={c.text}
 				name={c.postedBy.name}
+				avatar={c.postedBy.avatar}
 			/>
 		));
 		return (

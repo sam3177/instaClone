@@ -13,7 +13,7 @@ router.get(
 	requireLogin,
 	(req, res) => {
 		Post.find()
-			.populate('comments.postedBy', '_id name')
+			.populate('comments.postedBy', '_id name avatar')
 			.populate('postedBy', '_id name avatar')
 			.exec((error, result) => {
 				if (error) res.send({ error });

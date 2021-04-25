@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
+const crypto = require('crypto');
 
 const {
 	jwtSecret,
@@ -57,12 +58,20 @@ router.post('/signup', async (req, res) => {
 		password : cryptedPass
 	});
 	await user.save();
-	transporter.sendMail({
-		to: email,
-		from:'no_reply@insta.com',
-		subject:'signup success',
-		html:`<h1> Well done, ${name}!</h1><br><h5> Welcome to instagram!</h5>`
-	})
+	transporter
+		.sendMail({
+			to      : email,
+			from    : 'silviu.iulian734@gmail.com',
+			subject : 'signup success',
+			html    : `<h1> Well done, ${name}!</h1><br><h5> Welcome to instagram!</h5>`
+		})
+		.then(() => {
+			console.log('emmail sent');
+		})
+		.catch((err) => {
+			console.log('wtf is happening?');
+			console.log(err);
+		});
 	res.send('signup success');
 });
 
@@ -118,12 +127,70 @@ router.post('/login', async (req, res) => {
 	});
 });
 
-router.get(
-	'/protection-tests',
-	requireLogin,
-	(req, res) => {
-		res.send('loggenIn, protected');
-	}
-);
+//POST reset password mail
+router.post('/reset-password', (req, res) => {
+	crypto.randomBytes(32, (err, buffer) => {
+		if (err) console.log(err);
+		const token = buffer.toString('hex');
+		User.findOne({
+			email : req.body.email
+		}).then((user) => {
+			if (!user)
+				return res.send({
+					error : 'user unregistered'
+				});
+			user.resetToken = token;
+			user.expireToken = Date.now() + 3600000;
+			user.save().then((result) => {
+				const link = `http://localhost:3000/reset/${token}`;
+				transporter.sendMail({
+					to      : user.email,
+					from    : 'silviu.iulian734@gmail.com',
+					subject : 'reset password',
+					html    : `
+						<h2>You requested the password reset!</h2>
+						<p>Access the following link and follow the instructions:</p>
+						<a target="_blank" href="${link}">${link}</a>
+					`
+				});
+				res.send({
+					message :
+						'Check your email address, please!'
+				});
+			});
+		});
+	});
+});
+
+//PUT update passsword
+router.put('/reset/:token', async (req, res) => {
+	const cryptedPass = await bcrypt.hash(
+		req.body.password,
+		12
+	);
+	User.findOneAndUpdate(
+		{ resetToken: req.params.token },
+		{
+			password : cryptedPass
+		}
+	).then(()=>{
+		res.send({
+			message :
+				'Password successfully changed, please login!'
+		});
+	}).catch(err=>{
+		res.send({
+			error : err
+		});
+	})
+});
+
+// router.get(
+// 	'/protection-tests',
+// 	requireLogin,
+// 	(req, res) => {
+// 		res.send('loggenIn, protected');
+// 	}
+// );
 
 module.exports = router;

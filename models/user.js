@@ -2,30 +2,31 @@ const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
 
 const userSchema = new mongoose.Schema({
-	name      : {
+	name        : {
 		type     : String,
 		required : true
 	},
-	email     : {
+	email       : {
 		type     : String,
 		required : true
 	},
-	password  : {
+	password    : {
 		type     : String,
 		required : true
 	},
-	avatar    : {
+	avatar      : {
 		type     : String,
 		required : false
 	},
-	followers : [
-
+	resetToken  : String,
+	expireToken : Date,
+	followers   : [
 		{
 			type : ObjectId,
 			ref  : 'User'
 		}
 	],
-	following : [
+	following   : [
 		{
 			type : ObjectId,
 			ref  : 'User'

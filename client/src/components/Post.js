@@ -16,10 +16,10 @@ const Post = (props) => {
 	const [ comms, setComms ] = useState([
 		props.comms
 	]);
-	const [
-		commentsShow,
-		toggleCommentsShow
-	] = useToggle(false);
+	// const [
+	// 	commentsShow,
+	// 	toggleCommentsShow
+	// ] = useToggle(false);
 	const [
 		optionsShow,
 		toggleOptionsShow
@@ -67,7 +67,6 @@ const Post = (props) => {
 			)
 			.then((response) => {
 				setPost(response.data.result);
-
 				setComms(
 					response.data.result.comments.map(
 						(c) => (
@@ -76,6 +75,7 @@ const Post = (props) => {
 								_id={c._id}
 								text={c.text}
 								name={c.postedBy.name}
+								avatar={c.postedBy.avatar}
 							/>
 						)
 					)
@@ -181,7 +181,7 @@ const Post = (props) => {
 						</button>}
 					<button
 						className="like-btn"
-						onClick={toggleCommentsShow}
+						// onClick={toggleCommentsShow}
 					>
 						<i className="material-icons comm">
 							mode_comment
@@ -194,17 +194,12 @@ const Post = (props) => {
 						{comments.length} comment(s)
 					</span>
 				</div>
+				<div className="post-sections">
+								
 				<h3>{title}</h3>
 				<p>{body}</p>
-				<div
-					className={
-
-							commentsShow ? 'comments' :
-							'comments hide'
-					}
-				>
-					{comms}
-				</div>
+								</div>
+				<div className="comments">{comms}</div>
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
