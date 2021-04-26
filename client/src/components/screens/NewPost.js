@@ -3,7 +3,6 @@ import React, {
 	useEffect
 } from 'react';
 import { useHistory } from 'react-router-dom';
-
 import M from 'materialize-css';
 import axios from 'axios';
 

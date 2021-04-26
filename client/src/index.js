@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import { UserProvider } from './contexts/UserContext';
-
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
+
+import App from './App';
+import { UserProvider } from './contexts/UserContext';
+
+import './index.css';
+
 TimeAgo.addDefaultLocale(en)
 
 ReactDOM.render(

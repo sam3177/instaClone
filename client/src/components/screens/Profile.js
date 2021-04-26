@@ -8,6 +8,8 @@ import axios from 'axios';
 import Gallery from '../Gallery';
 import { UserContext } from '../../contexts/UserContext';
 
+import '../../styles/Profile.css'
+
 const Profile = () => {
 	const { state, dispatch } = useContext(
 		UserContext

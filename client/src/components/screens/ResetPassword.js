@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {useHistory, Link} from 'react-router-dom'
 import M from 'materialize-css';
 
 
 const ResetPassword = () => {
-	const history = useHistory();
 	const [ email, setEmail ] = useState('');
 	const resetPassword = () => {
 		console.log(email);
@@ -24,7 +22,6 @@ const ResetPassword = () => {
 					html    : response.data.message,
 					classes : 'light-green accent-3'
 				});
-				// history.push('/login');
 			}
 			console.log(response);
 		});

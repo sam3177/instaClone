@@ -13,3 +13,6 @@
 .comm-postedBy{
   margin-right: 10px;
 }
+.del-com{
+  cursor: pointer;
+}

@@ -5,6 +5,8 @@ import React, {
 
 import Post from '../Post';
 
+import '../../styles/Home.css'
+
 const Home = () => {
 	const [ posts, setPosts ] = useState([]);
 	const renderPosts = () => {

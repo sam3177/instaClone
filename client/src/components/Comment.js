@@ -8,6 +8,7 @@ import axios from 'axios';
 import ReactTimeAgo from 'react-time-ago';
 
 import { UserContext } from '../contexts/UserContext';
+
 import '../styles/Comment.css'
 
 const Comment = (props) => {

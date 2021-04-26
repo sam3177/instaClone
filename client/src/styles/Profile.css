@@ -1,0 +1,30 @@
+#all-container{
+   max-width: 700px;
+   margin-left: 50px;
+   margin-top: 10vh;
+}
+.upload-avatar{
+   position: absolute;
+   z-index: 111;
+   top: 0;
+   left: 0;
+   width: 160px !important;
+   height: 160px !important;
+   border-radius: 50%;
+   overflow: hidden;
+   display:flex;
+   justify-content:center;
+   align-items:flex-end;
+   margin:0;
+   padding: 0 !important;
+   display: none;
+   background:rgba(255, 255, 255, 0.701);
+   transition: all 0.3s ease-in-out;
+}
+.avatar-container:hover .upload-avatar{
+display:flex;
+transition: all 0.3s ease-in-out;
+}
+.avatar-container{
+   position: relative;
+}

@@ -2,13 +2,15 @@ import React, {
 	useState,
 	useContext
 } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import ReactTimeAgo from 'react-time-ago';
 
 import { UserContext } from '../contexts/UserContext';
 import useToggle from '../helpers/SwitchHelper';
 import Comment from './Comment';
+
+import '../styles/Post.css'
 
 const Post = (props) => {
 	const { state } = useContext(UserContext);

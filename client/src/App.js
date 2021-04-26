@@ -2,6 +2,13 @@ import React, {
 	useEffect,
 	useContext
 } from 'react';
+import {
+	Route,
+	Switch,
+	useHistory,
+	useLocation
+} from 'react-router-dom';
+
 import Navbar from './components/Navbar';
 import Home from './components/screens/Home';
 import Login from './components/screens/Login';
@@ -12,15 +19,9 @@ import UserProfile from './components/screens/UserProfile';
 import FollowingFeed from './components/screens/FollowingFeed';
 import ResetPassword from './components/screens/ResetPassword';
 import NewPasswordForm from './components/screens/NewPasswordForm';
-import {
-	Route,
-	Switch,
-	useHistory,
-	useLocation
-} from 'react-router-dom';
-
 import { UserContext } from './contexts/UserContext';
-import './App.css';
+
+import './styles/App.css';
 
 function App (){
 	const history = useHistory();
