@@ -3,10 +3,12 @@ import React, {
 	useState,
 	useEffect
 } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ReactTimeAgo from 'react-time-ago';
 
 import { UserContext } from '../contexts/UserContext';
+import '../styles/Comment.css'
 
 const Comment = (props) => {
 	const { state } = useContext(UserContext);
@@ -14,7 +16,7 @@ const Comment = (props) => {
 
 	useEffect(() => {
 		axios
-			.get(`comment/${props.id}`, {
+			.get(`/comment/${props.id}`, {
 				headers : {
 					Authorization :
 						'Bearer ' +
@@ -22,7 +24,7 @@ const Comment = (props) => {
 				}
 			})
 			.then((result) => {
-				console.log(result);
+				// console.log(result);
 				setComment(result.data);
 			})
 			.catch((err) => {
@@ -30,7 +32,6 @@ const Comment = (props) => {
 			});
 	}, []);
 	const likeControl = (option) => {
-		console.log('like');
 		axios
 			.put(
 				`/comment/${props.id}/${option}`,
@@ -44,25 +45,36 @@ const Comment = (props) => {
 				}
 			)
 			.then((response) => {
-				console.log(response);
-				// setPost(response.data.result);
+				// console.log(response);
+				setComment(response.data.result);
 			})
 			.catch((err) => console.log(err));
 	};
+
 	return (
 		<div>
 			{
 				comment ? <div className="comment">
 					<div className="row top">
-						<img
-							className="mini-round-avatar"
-							src={comment.postedBy.avatar}
-							alt="avatar"
-						/>
+						<Link
+							to={`profile/${comment.postedBy
+								._id}`}
+						>
+							<img
+								className="mini-round-avatar"
+								src={comment.postedBy.avatar}
+								alt="avatar"
+							/>
+						</Link>
 						<p>
-							<b className="comm-postedBy">
-								{comment.postedBy.name}
-							</b>
+							<Link
+								to={`profile/${comment.postedBy
+									._id}`}
+							>
+								<b className="comm-postedBy">
+									{comment.postedBy.name}
+								</b>
+							</Link>
 							{comment.text}
 						</p>
 						<span className="like-comment">
@@ -92,7 +104,6 @@ const Comment = (props) => {
 					<div className="row bottom">
 						<ReactTimeAgo
 							date={comment.postedOn}
-							locale="en-US"
 						/>
 						<span>
 							{
@@ -101,9 +112,24 @@ const Comment = (props) => {
 								`${comment.likes.length} likes`}
 						</span>
 						<span>Reply</span>
+						<span
+							className={
+
+									comment.postedBy._id ===
+									state._id ? 'del-com' :
+									'hide'
+							}
+							onClick={() =>
+								props.deleteComment(
+									comment.postedBy._id,
+									comment._id
+								)}
+						>
+							Delete
+						</span>
 					</div>
 				</div> :
-				<p>loading comm</p>}
+				<p>loading comm...</p>}
 		</div>
 	);
 };

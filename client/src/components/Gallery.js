@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../src/styles/Gallery.css'
 
 const Gallery = (props) => {
 	return (

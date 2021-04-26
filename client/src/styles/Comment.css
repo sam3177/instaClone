@@ -1,0 +1,15 @@
+.like-comment{
+  position:absolute;
+  right:0;
+  height:100%;
+  display:flex;
+  align-items:center;
+}
+.comment{
+  display:flex;
+  flex-direction: column;
+  margin:5px 0;
+}
+.comm-postedBy{
+  margin-right: 10px;
+}

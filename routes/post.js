@@ -6,6 +6,7 @@ const { route } = require('./auth');
 const router = express.Router();
 const User = mongoose.model('User');
 const Post = mongoose.model('Post');
+const Comment = mongoose.model('Comment');
 
 //GET all posts
 router.get(
@@ -121,7 +122,8 @@ router.post(
 
 		const post = new Post({
 			...req.body,
-			postedBy : req.user._id
+			postedBy : req.user._id,
+			postedOn:Date.now()
 		});
 		try {
 			await post.save();
@@ -192,7 +194,10 @@ router.delete(
 				req.user._id.toString() ===
 				post.postedBy.toString()
 			) {
-				post
+				Comment.find({ '_id': { $in: post.comments } })
+				.exec((error, comments)=>{
+					comments.map((comment)=>comment.remove())
+					post
 					.remove()
 					.then(() => {
 						res.send({
@@ -200,6 +205,7 @@ router.delete(
 						});
 					})
 					.catch((error) => console.log(error));
+				})
 			}
 			else {
 				// console.log(req.user._id);

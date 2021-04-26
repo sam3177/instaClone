@@ -4,10 +4,10 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import ReactTimeAgo from 'react-time-ago';
 
 import { UserContext } from '../contexts/UserContext';
 import useToggle from '../helpers/SwitchHelper';
-
 import Comment from './Comment';
 
 const Post = (props) => {
@@ -26,7 +26,8 @@ const Post = (props) => {
 		comments,
 		title,
 		body,
-		postedBy
+		postedBy,
+		postedOn
 	} = post;
 	const { name, avatar } = post.postedBy;
 
@@ -46,15 +47,15 @@ const Post = (props) => {
 				}
 			)
 			.then((response) => {
-				console.log(response);
+				// console.log(response);
 				setPost(response.data.result);
 			})
 			.catch((err) => console.log(err));
 	};
-	const addComment = (option) => {
+	const addComment = () => {
 		axios
 			.put(
-				`/post/${_id}/${option}`,
+				`/post/${_id}/add-comment`,
 				{ text: comment },
 				{
 					headers : {
@@ -66,9 +67,36 @@ const Post = (props) => {
 			)
 			.then((response) => {
 				setPost(response.data.result);
-				console.log('hahaha');
 			})
 			.catch((err) => console.log(err));
+	};
+	const deleteComment = (postedBy, id) => {
+		if (
+			postedBy === state._id ||
+			postedBy._id === state._id
+		) {
+			axios
+				.delete(
+					`/post/${_id}/comment/${id}/delete`,
+					{
+						headers : {
+							Authorization :
+								'Bearer ' +
+								localStorage.getItem('token')
+						}
+					}
+				)
+				.then((response) => {
+					// console.log(response);
+					setPost(response.data.result);
+				})
+				.catch((err) => console.log(err));
+		}
+		else {
+			console.log(
+				"Not your comment or not your post, you can't delete it! "
+			);
+		}
 	};
 	const deletePost = () => {
 		if (postedBy._id === state._id) {
@@ -81,7 +109,7 @@ const Post = (props) => {
 					}
 				})
 				.then((response) => {
-					console.log(response);
+					// console.log(response);
 					props.renderPosts();
 				})
 				.catch((err) => console.log(err));
@@ -99,11 +127,15 @@ const Post = (props) => {
 				<div className="card-content">
 					<div className="post-header">
 						<div className="user-info">
-							<img
-								className="mini-round-avatar"
-								src={avatar}
-								alt="avatar"
-							/>
+							<Link
+								to={`/profile/${postedBy._id}`}
+							>
+								<img
+									className="mini-round-avatar"
+									src={avatar}
+									alt="avatar"
+								/>
+							</Link>
 							<Link
 								to={`/profile/${postedBy._id}`}
 							>
@@ -143,6 +175,9 @@ const Post = (props) => {
 							</div>
 						</span>
 					</div>
+					<div className="row bottom">
+						<ReactTimeAgo date={postedOn} />
+					</div>
 					<div className="card-image">
 						<img
 							className="post-photo"
@@ -179,27 +214,42 @@ const Post = (props) => {
 						</button>
 					</div>
 					<div className="post-sections">
-						<span>{likes.length} like(s)</span>
 						<span>
-							{comments.length} comment(s)
+							{
+								likes.length === 1 ? '1 like' :
+								`${likes.length} likes`}
+						</span>
+						<span>
+							{
+								comments.length ===
+								1 ? '1 comment' :
+								`${comments.length} comments`}
 						</span>
 					</div>
 					<div className="post-sections">
 						<h3>{title}</h3>
 						<p>{body}</p>
 					</div>
-					<div className="comments">
+					<div
+						className={
+
+								comments.length ===
+								0 ? 'comments hide' :
+								'comments'
+						}
+					>
 						{comments.map((comment) => (
 							<Comment
 								key={comment}
 								id={comment}
+								deleteComment={deleteComment}
 							/>
 						))}
 					</div>
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
-							addComment('comment_add');
+							addComment();
 							setComment('');
 						}}
 					>
