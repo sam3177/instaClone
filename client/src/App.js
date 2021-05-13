@@ -19,6 +19,8 @@ import UserProfile from './components/screens/UserProfile';
 import FollowingFeed from './components/screens/FollowingFeed';
 import ResetPassword from './components/screens/ResetPassword';
 import NewPasswordForm from './components/screens/NewPasswordForm';
+import EditProfile from './components/screens/EditProfile';
+import EditPost from './components/screens/EditPost';
 import { UserContext } from './contexts/UserContext';
 
 import './styles/App.css';
@@ -78,6 +80,12 @@ function App (){
 				</Route>
 				<Route path="/reset/:token" exact>
 					<NewPasswordForm />
+				</Route>
+				<Route path="/edit-profile" exact>
+					<EditProfile />
+				</Route>
+				<Route path="/post/edit/:id" exact>
+					<EditPost />
 				</Route>
 				<Route path="/profile/:id" exact>
 					{

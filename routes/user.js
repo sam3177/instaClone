@@ -104,7 +104,7 @@ router.put(
 	}
 );
 
-//PUT change profile picture
+//PUT change profile picture / edit infos
 router.put(
 	'/user/:id',
 	requireLogin,
@@ -125,5 +125,7 @@ router.put(
 			});
 	}
 );
+
+
 
 module.exports = router;

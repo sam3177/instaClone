@@ -31,7 +31,9 @@ const userSchema = new mongoose.Schema({
 			type : ObjectId,
 			ref  : 'User'
 		}
-	]
+	],
+	gender: String,
+	birthday: String
 });
 
 mongoose.model('User', userSchema);

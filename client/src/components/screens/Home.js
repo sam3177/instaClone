@@ -10,7 +10,6 @@ import '../../styles/Home.css'
 const Home = () => {
 	const [ posts, setPosts ] = useState([]);
 	const renderPosts = () => {
-		
 		fetch('/posts/all', {
 			headers : {
 				Authorization :
@@ -20,7 +19,7 @@ const Home = () => {
 		})
 			.then((res) => res.json())
 			.then((result) => {
-				// console.log(result);
+				console.log(result);
 				setPosts(result.result.reverse());
 			});
 	};

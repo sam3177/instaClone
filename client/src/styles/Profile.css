@@ -1,8 +1,4 @@
-#all-container{
-   max-width: 700px;
-   margin-left: 50px;
-   margin-top: 10vh;
-}
+
 .upload-avatar{
    position: absolute;
    z-index: 111;
@@ -27,4 +23,8 @@ transition: all 0.3s ease-in-out;
 }
 .avatar-container{
    position: relative;
+}
+.post-sections h3{
+   margin: 0;
+   margin-bottom: 10px;
 }

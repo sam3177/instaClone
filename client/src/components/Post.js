@@ -10,7 +10,7 @@ import { UserContext } from '../contexts/UserContext';
 import useToggle from '../helpers/SwitchHelper';
 import Comment from './Comment';
 
-import '../styles/Post.css'
+import '../styles/Post.css';
 
 const Post = (props) => {
 	const { state } = useContext(UserContext);
@@ -160,7 +160,19 @@ const Post = (props) => {
 							>
 								<ul className="">
 									<li>Share</li>
-									<li>Edit</li>
+									<Link to={`/post/edit/${_id}`}>
+									<li
+										className={
+
+											postedBy._id ===
+											state._id ? '' :
+											'disabled'
+									}
+
+									>
+										Edit
+										</li>
+										</Link>
 									<li
 										className={
 
@@ -209,11 +221,7 @@ const Post = (props) => {
 									favorite_border
 								</i>
 							</button>}
-						<button className="like-btn">
-							<i className="material-icons comm">
-								mode_comment
-							</i>
-						</button>
+						
 					</div>
 					<div className="post-sections">
 						<span>

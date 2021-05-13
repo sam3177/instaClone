@@ -4,6 +4,7 @@ import React, {
 	useState
 } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 import Gallery from '../Gallery';
 import { UserContext } from '../../contexts/UserContext';
@@ -131,14 +132,17 @@ const Profile = () => {
 									<p>{state.email}</p>
 								</div>
 								<div className="col s4">
+									<Link to="/edit-profile">
+
 									<button className="submit btn">
 										Edit profile
 									</button>
+									</Link>
 								</div>
 								<div className="col s2">
-									<i className="material-icons">
+									{/* <i className="material-icons">
 										settings
-									</i>
+									</i> */}
 								</div>
 							</div>
 							<div className="row profile-container">

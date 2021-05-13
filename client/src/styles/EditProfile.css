@@ -1,0 +1,30 @@
+@media (min-width:601px){
+h5{
+      text-align: right;
+      margin-top:15px;
+   }
+}
+.input-field{
+   margin-top:0;
+}
+.select{
+   width:40%;
+}
+.round-avatar{
+   display:block;
+   margin:0 auto;
+}
+.react-date-picker__wrapper{
+   border:none;
+}
+.react-date-picker{
+   width:40%;
+}
+.react-date-picker__inputGroup__day, .react-date-picker__inputGroup__month{
+   width: 22px !important;
+   text-align:center;
+}
+.react-date-picker__inputGroup__year{
+   width: 44px !important;
+   text-align:center;
+}

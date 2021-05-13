@@ -104,11 +104,6 @@ router.get(
 );
 
 
-//GET post form
-router.get('/posts/new', (req, res) => {
-	res.send('newPostiii');
-});
-
 //POST submit new post
 router.post(
 	'/posts/new',
@@ -132,6 +127,27 @@ router.post(
 			console.log(err);
 			res.send({ error: 'DB problems' });
 		}
+	}
+);
+
+// edit post put
+router.put(
+	'/post/:id',
+	requireLogin,
+	(req, res) => {
+		Post.findByIdAndUpdate(
+			req.params.id,
+			req.body,
+			{ new: true }
+		)
+			.then((post) => {
+				// console.log(user);
+				res.send({ post });
+			})
+			.catch((error) => {
+				console.log(error);
+				res.send(error);
+			});
 	}
 );
 
