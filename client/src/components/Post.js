@@ -31,9 +31,8 @@ const Post = (props) => {
 		postedBy,
 		postedOn
 	} = post;
-	const { name, avatar } = post.postedBy;
+	const { name, avatar } = postedBy;
 
-	// console.log(props.postedBy);
 	const likeControl = (option) => {
 		console.log('like');
 		axios
@@ -124,9 +123,9 @@ const Post = (props) => {
 	};
 
 	return (
-		<div>
+		<div onClick={optionsShow ? toggleOptionsShow : console.log}>
 			<div className="post card">
-				<div className="card-content">
+				<div className="card-content post-content">
 					<div className="post-header">
 						<div className="user-info">
 							<Link
@@ -161,18 +160,17 @@ const Post = (props) => {
 								<ul className="">
 									<li>Share</li>
 									<Link to={`/post/edit/${_id}`}>
-									<li
-										className={
+										<li
+											className={
 
-											postedBy._id ===
-											state._id ? '' :
-											'disabled'
-									}
-
-									>
-										Edit
+													postedBy._id ===
+													state._id ? '' :
+													'disabled'
+											}
+										>
+											Edit
 										</li>
-										</Link>
+									</Link>
 									<li
 										className={
 
@@ -221,7 +219,6 @@ const Post = (props) => {
 									favorite_border
 								</i>
 							</button>}
-						
 					</div>
 					<div className="post-sections">
 						<span>

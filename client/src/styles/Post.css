@@ -19,8 +19,12 @@
 }
 .post-options li{
    padding-left: 10px;
-   transition: background 300ms ease-in-out;
+   transition: background 100ms ease-in-out;
    cursor: pointer;
+}
+.post-options a{
+   text-decoration: none;
+   color: inherit;
 }
 .post-options li:hover{
    background-color:rgba(173, 173, 173, 0.493);
@@ -72,4 +76,11 @@ padding-top:5px;
 .disabled{
    color:grey;
    cursor: not-allowed!important;
+}
+.post-content{
+   padding:10px;
+padding-top:5px;
+}
+.row{
+   margin-left: 0px;
 }

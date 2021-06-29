@@ -56,7 +56,7 @@ router.get(
 		.populate('postedBy', '_id name avatar')
 			.then((post) => {
 				res.send(post);
-				// console.log(post);
+				console.log('%^^%^%^',post);
 			})
 			.catch((error) => {
 				res.send(error);

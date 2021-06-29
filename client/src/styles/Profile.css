@@ -23,6 +23,9 @@ transition: all 0.3s ease-in-out;
 }
 .avatar-container{
    position: relative;
+   width: 160px !important;
+   height: 160px !important;
+   margin-right: 20px;
 }
 .post-sections h3{
    margin: 0;

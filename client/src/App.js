@@ -21,6 +21,7 @@ import ResetPassword from './components/screens/ResetPassword';
 import NewPasswordForm from './components/screens/NewPasswordForm';
 import EditProfile from './components/screens/EditProfile';
 import EditPost from './components/screens/EditPost';
+import SinglePost from './components/screens/SinglePost';
 import { UserContext } from './contexts/UserContext';
 
 import './styles/App.css';
@@ -71,6 +72,9 @@ function App (){
 				</Route>
 				<Route path="/post/new" exact>
 					<NewPost />
+				</Route>
+				<Route path="/post/:id" exact>
+					<SinglePost />
 				</Route>
 				<Route path="/reset-password" exact>
 					<ResetPassword />
