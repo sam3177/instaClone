@@ -48,7 +48,7 @@ const NavBar = () => {
 							Logout
 						</Nav.Link>
 					</Nav> :
-					<Nav className="mr-auto">
+					<Nav className="mr-auto right">
 						<Nav.Link href="/login">
 							Login
 						</Nav.Link>

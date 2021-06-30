@@ -2,21 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en'
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 
 import App from './App';
 import { UserProvider } from './contexts/UserContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 import './index.css';
 
-TimeAgo.addDefaultLocale(en)
+TimeAgo.addDefaultLocale(en);
 
 ReactDOM.render(
 	<BrowserRouter>
-		<UserProvider>
-			<App />
-		</UserProvider>
+		<ThemeProvider>
+			<UserProvider>
+				<App />
+			</UserProvider>
+		</ThemeProvider>
 	</BrowserRouter>,
 	document.getElementById('root')
 );

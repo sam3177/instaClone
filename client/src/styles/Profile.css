@@ -3,7 +3,7 @@
    position: absolute;
    z-index: 111;
    top: 0;
-   left: 0;
+   left: 1px;
    width: 160px !important;
    height: 160px !important;
    border-radius: 50%;
@@ -11,9 +11,9 @@
    display:flex;
    justify-content:center;
    align-items:flex-end;
-   margin:0;
+   margin:0 ;
    padding: 0 !important;
-   display: none;
+   /* display: none; */
    background:rgba(255, 255, 255, 0.701);
    transition: all 0.3s ease-in-out;
 }
@@ -30,4 +30,8 @@ transition: all 0.3s ease-in-out;
 .post-sections h3{
    margin: 0;
    margin-bottom: 10px;
+}
+.col{
+   flex-basis: auto!important;
+   flex-grow: 0!important;
 }
