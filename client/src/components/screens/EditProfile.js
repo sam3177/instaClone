@@ -23,7 +23,7 @@ const EditProfile = () => {
 	const [ email, setEmail ] = useState('');
 	const [ gender, setGender ] = useState('');
 	const [ birthday, setBirthday ] = useState(
-		Date.now()
+		new Date()
 	);
 	const history = useHistory();
 
@@ -71,7 +71,7 @@ const EditProfile = () => {
 				birthday ? setBirthday(
 					new Date(birthday)
 				) :
-				setBirthday(Date.now());
+				setBirthday(new Date());
 		},
 		[ state ]
 	);
