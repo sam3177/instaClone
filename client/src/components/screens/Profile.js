@@ -30,7 +30,7 @@ const Profile = () => {
 			})
 			.then((res) => {
 				setPosts(res.data.posts);
-				console.log(res.data);
+				// console.log(res.data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -133,9 +133,8 @@ const Profile = () => {
 								</div>
 								<div className="col s4">
 									<Link to="/edit-profile">
-
 									<button className="submit btn">
-										Edit profile
+										EDIT PROFILE
 									</button>
 									</Link>
 								</div>

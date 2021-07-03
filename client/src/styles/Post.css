@@ -12,6 +12,8 @@
 .post-options{
    width:100px;
    position:absolute;
+   color: black;
+   background-color:rgb(129, 129, 129);
    right: right;
    top:bottom;
    margin:0;
@@ -45,6 +47,9 @@
 .card-content{
 padding:10px;
 padding-top:5px;
+}
+.profile-name{
+   font-size: 22px;
 }
 .comments{
    margin-top:10px;

@@ -1,20 +1,29 @@
 import React, {
 	useState,
-	useEffect
+	useEffect,
+	useContext
 } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import {
+	useHistory,
+	useParams
+} from 'react-router-dom';
 import axios from 'axios';
 
-import '../../styles/EditPost.css'
+import { ThemeContext } from '../../contexts/ThemeContext';
+
+import '../../styles/EditPost.css';
 
 const EditPost = (props) => {
-   const {id} = useParams()
+	const { id } = useParams();
 	const [ title, setTitle ] = useState('');
 	const [ body, setBody ] = useState('');
-   const[photo, setPhoto] = useState('');
+	const [ photo, setPhoto ] = useState('');
 	const history = useHistory();
+	const { isDarkTheme } = useContext(
+		ThemeContext
+	);
 	useEffect(() => {
-      axios
+		axios
 			.get(`/post/${id}`, {
 				headers : {
 					Authorization :
@@ -26,7 +35,7 @@ const EditPost = (props) => {
 				console.log(result);
 				setTitle(result.data.title);
 				setBody(result.data.body);
-            setPhoto(result.data.photo)
+				setPhoto(result.data.photo);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -36,7 +45,7 @@ const EditPost = (props) => {
 		axios
 			.put(
 				`/post/${id}`,
-				{title, body },
+				{ title, body },
 				{
 					headers : {
 						Authorization :
@@ -47,17 +56,22 @@ const EditPost = (props) => {
 			)
 			.then((res) => {
 				console.log(res);
-				history.push('/')
+				history.push('/');
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-         
 	};
-   
+
 	return (
 		<div className="centered-container">
-			<div className="card formContent">
+			<div
+				className={
+
+						isDarkTheme ? 'card formContent dark-cards' :
+						'card formContent'
+				}
+			>
 				<h3>Edit Post</h3>
 				<form
 					className="col s12"
@@ -66,9 +80,9 @@ const EditPost = (props) => {
 						submitPost();
 					}}
 				>
-               <div className="row edit">
-                  <img src={photo} alt={title}/>
-               </div>
+					<div className="row edit">
+						<img src={photo} alt={title} />
+					</div>
 					<div className="row">
 						<div className="input-field col s12">
 							<input

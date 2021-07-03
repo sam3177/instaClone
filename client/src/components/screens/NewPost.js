@@ -1,10 +1,13 @@
 import React, {
 	useState,
-	useEffect
+	useEffect,
+	useContext
 } from 'react';
 import { useHistory } from 'react-router-dom';
 import M from 'materialize-css';
 import axios from 'axios';
+
+import {ThemeContext} from '../../contexts/ThemeContext'
 
 const NewPost = () => {
 	const [ title, setTitle ] = useState('');
@@ -12,7 +15,7 @@ const NewPost = () => {
 	const [ image, setImage ] = useState('');
 	const [ imgUrl, setImgUrl ] = useState('');
 	const history = useHistory();
-
+	const {isDarkTheme} = useContext(ThemeContext)
 	useEffect(() => {
 		imgUrl &&
 			axios
@@ -71,7 +74,7 @@ const NewPost = () => {
 	};
 	return (
 		<div className="centered-container">
-			<div className="card formContent">
+		<div className={isDarkTheme ? "card formContent dark-cards" : "card formContent"}>
 				<h3>New post</h3>
 				<form
 					className="col s12"

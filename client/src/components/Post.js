@@ -7,6 +7,7 @@ import axios from 'axios';
 import ReactTimeAgo from 'react-time-ago';
 
 import { UserContext } from '../contexts/UserContext';
+import { ThemeContext } from '../contexts/ThemeContext';
 import useToggle from '../helpers/SwitchHelper';
 import Comment from './Comment';
 
@@ -14,6 +15,7 @@ import '../styles/Post.css';
 
 const Post = (props) => {
 	const { state } = useContext(UserContext);
+	const { isDarkTheme } = useContext(ThemeContext);
 	const [ comment, setComment ] = useState('');
 
 	const [
@@ -124,7 +126,7 @@ const Post = (props) => {
 
 	return (
 		<div onClick={optionsShow ? toggleOptionsShow : console.log}>
-			<div className="post card">
+			<div className={isDarkTheme? "post card dark-cards" : "post card"}>
 				<div className="card-content post-content">
 					<div className="post-header">
 						<div className="user-info">
@@ -139,6 +141,7 @@ const Post = (props) => {
 							</Link>
 							<Link
 								to={`/profile/${postedBy._id}`}
+								className="profile-name"
 							>
 								{name}
 							</Link>

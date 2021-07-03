@@ -23,10 +23,15 @@ import EditProfile from './components/screens/EditProfile';
 import EditPost from './components/screens/EditPost';
 import SinglePost from './components/screens/SinglePost';
 import { UserContext } from './contexts/UserContext';
+import { ThemeContext } from './contexts/ThemeContext';
+
 
 import './styles/App.css';
 
 function App (){
+	const { isDarkTheme } = useContext(
+		ThemeContext
+	);
 	const history = useHistory();
 	const location = useLocation();
 	const { state, dispatch } = useContext(
@@ -55,7 +60,7 @@ function App (){
 		}
 	}, []);
 	return (
-		<div className="App">
+		<div className={isDarkTheme ? "App dark-background" : "App"}>
 			<Navbar />
 			<Switch>
 				<Route path="/" exact>
