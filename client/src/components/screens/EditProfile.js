@@ -5,9 +5,11 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import DatePicker from "react-date-picker";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+
 
 import { UserContext } from '../../contexts/UserContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 import '../../styles/EditProfile.css';
 
@@ -15,18 +17,21 @@ const EditProfile = () => {
 	const { state, dispatch } = useContext(
 		UserContext
 	);
-   
+	const {isDarkTheme} = useContext(ThemeContext)
+
 	const [ name, setName ] = useState('');
 	const [ email, setEmail ] = useState('');
 	const [ gender, setGender ] = useState('');
-	const[birthday, setBirthday ] = useState('')
+	const [ birthday, setBirthday ] = useState(
+		Date.now()
+	);
 	const history = useHistory();
-	
+
 	const submitChanges = () => {
 		axios
 			.put(
 				`/user/${state._id}`,
-				{name, email, gender, birthday },
+				{ name, email, gender, birthday },
 				{
 					headers : {
 						Authorization :
@@ -44,27 +49,40 @@ const EditProfile = () => {
 					type    : 'USER',
 					payload : res.data.user
 				});
-				history.push('/profile')
+				history.push('/profile');
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-	}
+	};
 
-	useEffect(() => {
-      const {name, email, gender, birthday } = state;
-      setName(name);
-      setEmail(email);
-      setGender(gender);
-		setBirthday(new Date(birthday));
-   },[state]);
+	useEffect(
+		() => {
+			const {
+				name,
+				email,
+				gender,
+				birthday
+			} = state;
+			setName(name);
+			setEmail(email);
+			setGender(gender);
 
+				birthday ? setBirthday(
+					new Date(birthday)
+				) :
+				setBirthday(Date.now());
+		},
+		[ state ]
+	);
 
 	return (
 		<div>
 			{
 				!state ? <p>Loading...</p> :
-				<div id="all-container">
+				<div id="all-container"
+						className={isDarkTheme && 'dark-background'}
+				>
 					<div className="row">
 						<div className="col s12 avatar-container">
 							<img
@@ -77,7 +95,7 @@ const EditProfile = () => {
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
-							submitChanges()
+							submitChanges();
 						}}
 					>
 						<div className="row">
@@ -110,22 +128,24 @@ const EditProfile = () => {
 								</div>
 							</div>
 						</div>
-						
+
 						<div className="row">
 							<div className="col s12 m4">
 								<h5>Gender</h5>
 							</div>
 							<div className="col s12 m8">
 								<div className="input-field select">
-									<select 
-										value={gender ? gender : 'none'}
+									<select
+										value={
+
+												gender ? gender :
+												'none'
+										}
 										className="browser-default"
-										onChange={(e) =>setGender(e.target.value)}
-                           >
-										<option
-											value="none"
-											disabled
-										>
+										onChange={(e) =>
+											setGender(e.target.value)}
+									>
+										<option value="none" disabled>
 											--
 										</option>
 										<option value="male">
@@ -144,21 +164,22 @@ const EditProfile = () => {
 							</div>
 							<div className="col s12 m8">
 								<div className="input-field">
-								<DatePicker 
+									<DatePicker 
 								// format="y MM dd"
 								value={birthday} 
 								onChange={date => setBirthday(date)} 
 								maxDate={new Date()}
 								/>
+									
 								</div>
 							</div>
 						</div>
 						<div className="row">
-						<div className="input-field col s4 offset-s4">
-							<button className="btn submit waves-light col s12">
-								Submit Changes
-							</button>
-						</div>
+							<div className="input-field col s4 offset-s4">
+								<button className="btn submit waves-light col s12">
+									Submit Changes
+								</button>
+							</div>
 						</div>
 					</form>
 				</div>}

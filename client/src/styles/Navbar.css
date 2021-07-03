@@ -21,6 +21,7 @@
 .nav-item{
    cursor: pointer;
    padding: 7px;
+   color: black;
 }
 .navbar-collapse.show>.right>a{
    width:80%;

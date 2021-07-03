@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, {
 	useState,
-	useEffect
+	useEffect,
+	useContext
 } from 'react';
 import {
 	Link,
@@ -9,7 +10,10 @@ import {
 } from 'react-router-dom';
 import M from 'materialize-css';
 
+import { ThemeContext } from '../../contexts/ThemeContext';
+
 const Signup = () => {
+	const { isDarkTheme } = useContext(ThemeContext);
 	const [ name, setName ] = useState('');
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
@@ -72,7 +76,11 @@ const Signup = () => {
 	};
 	return (
 		<div className="centered-container">
-			<div className="card formContent">
+			<div className={
+
+isDarkTheme ? 'card formContent dark-cards' :
+'card formContent'
+}>
 				<h3>Signup</h3>
 				<form
 					onSubmit={(e) => {

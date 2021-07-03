@@ -10,11 +10,13 @@ import axios from 'axios';
 import M from 'materialize-css';
 
 import { UserContext } from '../../contexts/UserContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 const Login = () => {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const { dispatch } = useContext(UserContext);
+	const { isDarkTheme } = useContext(ThemeContext);
 	const history = useHistory();
 	const loginUser = () => {
 		axios
@@ -54,7 +56,11 @@ const Login = () => {
 	};
 	return (
 		<div className="centered-container">
-			<div className="card formContent">
+			<div className={
+
+isDarkTheme ? 'card formContent dark-cards' :
+'card formContent'
+}>
 				<h3>Login</h3>
 				<form
 					className="col s12"

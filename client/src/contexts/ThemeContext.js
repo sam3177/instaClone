@@ -7,7 +7,6 @@ function ThemeProvider (props){
 	const isDarkSaved = JSON.parse(localStorage.getItem(
 		'isDarkTheme'
 	))
-	console.log(isDarkSaved);
 	const [ isDarkTheme, toggleTheme ] = useToggle(
 		isDarkSaved ? true : false
 	);
