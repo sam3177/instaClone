@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom'
 
 import Gallery from '../Gallery';
 import { UserContext } from '../../contexts/UserContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 import '../../styles/Profile.css'
 
@@ -15,6 +16,7 @@ const Profile = () => {
 	const { state, dispatch } = useContext(
 		UserContext
 	);
+	const{ isDarkTheme} = useContext(ThemeContext)
 	const [ posts, setPosts ] = useState([]);
 	const [ image, setImage ] = useState('');
 	const [ imgUrl, setImgUrl ] = useState('');
@@ -103,7 +105,10 @@ const Profile = () => {
 		<div>
 			{
 				!state ? <p>Loading...</p> :
-				<div id="all-container">
+				<div 
+					id="all-container"
+					className={isDarkTheme ? 'white-text': '' }
+				>
 					<div className="row general-infos">
 						<div className="col s12 m4 avatar-container">
 							<img
@@ -131,14 +136,14 @@ const Profile = () => {
 									<h4>{state.name}</h4>
 									<p>{state.email}</p>
 								</div>
-								<div className="col s4">
+								<div className="col s6 m4 edit-pr-btn">
 									<Link to="/edit-profile">
 									<button className="submit btn">
 										EDIT PROFILE
 									</button>
 									</Link>
 								</div>
-								<div className="col s2">
+								<div className="col sm2">
 									{/* <i className="material-icons">
 										settings
 									</i> */}

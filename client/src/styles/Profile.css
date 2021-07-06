@@ -34,4 +34,20 @@ transition: all 0.3s ease-in-out;
 .col{
    flex-basis: auto!important;
    flex-grow: 0!important;
+   margin: 0 auto!important;
+}
+.edit-pr-btn{
+   margin-left: 10px!important;
+   min-width: 160px!important;
+ }
+@media(max-width:600px){
+   .edit-pr-btn{
+      margin: 0 auto!important;
+   }
+.row.profile-container{
+   text-align: center;
+}
+}
+.row.general-infos{
+   margin-right: 0;
 }

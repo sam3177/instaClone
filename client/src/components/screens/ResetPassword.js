@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import M from 'materialize-css';
 
+import {ThemeContext} from '../../contexts/ThemeContext'
+
 
 const ResetPassword = () => {
+	const {isDarkTheme} = useContext(ThemeContext)
 	const [ email, setEmail ] = useState('');
 	const resetPassword = () => {
 		console.log(email);
@@ -28,7 +31,7 @@ const ResetPassword = () => {
 	};
 	return (
 		<div className="centered-container">
-			<div className="card formContent">
+			<div className={isDarkTheme ? "card formContent dark-cards" : "card formContent"}>
 				<h3>Reset password</h3>
 				<form
 					className="col s12"

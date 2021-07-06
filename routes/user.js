@@ -126,6 +126,24 @@ router.put(
 	}
 );
 
+//find userd by name/email
+router.post('/search-user',
+	requireLogin,
+	(req, res) => {
+	const searchRegEx = new RegExp(`${req.body.searchUser}`)
+	User.find({name: {$regex: searchRegEx}})
+	.select('_id name')
+		.then(result=>{
+			console.log(result);
+			res.send({result})
+		})
+		.catch((error) => {
+			console.log(error);
+			res.send({error})
+
+		})
+})
+
 
 
 module.exports = router;

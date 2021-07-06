@@ -66,10 +66,9 @@ router.post('/signup', async (req, res) => {
 			html    : `<h1> Well done, ${name}!</h1><br><h5> Welcome to instagram!</h5>`
 		})
 		.then(() => {
-			console.log('emmail sent');
+			console.log('email sent');
 		})
 		.catch((err) => {
-			console.log('wtf is happening?');
 			console.log(err);
 		});
 	res.send('signup success');
@@ -169,8 +168,10 @@ router.put('/reset/:token', async (req, res) => {
 		12
 	);
 	User.findOneAndUpdate(
-		{ resetToken: req.params.token },
+		{ resetToken: req.params.token, expireToken: {$gt: Date.now()} },
 		{
+			resetToken: undefined,
+			expireToken: undefined,
 			password : cryptedPass
 		}
 	).then(()=>{

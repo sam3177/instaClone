@@ -7,9 +7,11 @@ import axios from 'axios';
 
 import Gallery from '../Gallery';
 import { UserContext } from '../../contexts/UserContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 const Profile = (props) => {
 	const { state , dispatch} = useContext(UserContext);
+	const{isDarkTheme} = useContext(ThemeContext);
 	const [ user, setUser ] = useState();
 	const [ posts, setPosts ] = useState([]);
 	useEffect(() => {
@@ -45,7 +47,6 @@ const Profile = (props) => {
 			)
 			.then((res) => {
 				setPosts(res.data);
-				console.log(res.data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -83,7 +84,11 @@ const Profile = (props) => {
 	return (
       <>
       {!user ? <p>Loading...</p> : 
-      <div id="all-container">
+      <div 
+			id="all-container"
+			className={isDarkTheme ? 'white-text': '' }
+			
+		>
       
 			<div className="row general-infos">
 				<div className="col s12 m4">
@@ -95,7 +100,7 @@ const Profile = (props) => {
 				</div>
 				<div className="col s12 m8">
 					<div className="row profile-container">
-						<div className="col s12">
+						<div className="col s8">
 							<h4>{user.name}</h4>
 							<p>{user.email}</p>
 						</div>

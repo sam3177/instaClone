@@ -162,7 +162,8 @@ const Post = (props) => {
 							>
 								<ul className="">
 									<li>Share</li>
-									<Link to={`/post/edit/${_id}`}>
+									<Link to={postedBy._id ===
+													state._id ? `/post/edit/${_id}` : '#!'}>
 										<li
 											className={
 
@@ -181,7 +182,8 @@ const Post = (props) => {
 												state._id ? '' :
 												'disabled'
 										}
-										onClick={deletePost}
+										onClick={postedBy._id ===
+											state._id && deletePost}
 									>
 										Delete
 									</li>

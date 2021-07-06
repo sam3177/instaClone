@@ -129,7 +129,7 @@ nav a{
 .dark-primary{
   background-color:rgba(34, 34, 34, 0.87)!important;
 }
-.dark-primary *, .dark-background input, .dark-background h5{
+.white-text * *, .dark-primary *, .dark-background input, .dark-background h5{
   color:rgb(222, 224, 224)!important;
 }
 .dark-background{
@@ -141,6 +141,7 @@ nav a{
   background-color:rgb(34, 34, 34) ;
   color: white;
 }
+
 .dark-cards{
   background-color:rgb(54, 54, 54)!important;
   color:rgb(222, 224, 224)!important;

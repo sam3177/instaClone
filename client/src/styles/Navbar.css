@@ -2,33 +2,53 @@
    position: absolute;
    right:10px;
 }
+.navbar{
+   justify-content: left!important;
+   height: 64px !important;
+}
 .navbar-toggler{
    position: absolute;
    right:10px;
 }
 @media(max-width:767px){
-   .navbar-collapse.show>.right, .navbar-collapsing>.right{
+   
+   .navbar-collapse.show>.right{
       z-index: 22;
-      background-color: rgba(255, 255, 255, 0.959)!important;
+      background-color: rgba(255, 255, 255, 0.959);
       width:100vw;
       border: 1px solid rgba(0,0,0,.125);
       border-radius: .25rem;
       top:64px;
       transition: all 0.3s ease-in-out;
+      /* transition: background-color 5000s; */
    }
    
+}
+@media(min-width:768px){
+   .navbar-collapse.show>.right{
+      display: none;
+   }
+   .mr-auto.right{
+      background-color: transparent!important;
+   }
 }
 .nav-item{
    cursor: pointer;
    padding: 7px;
    color: black;
 }
-.navbar-collapse.show>.right>a{
+.navbar-collapse.show>.right>a, .navbar-collapse.show>.right>.nav-item{
    width:80%;
    margin: 0 auto;
    height:50px;
    padding:0 0 20px 0;
    text-align: center;
+}
+
+.navbar-collapse.collapsing, .navbar-collapse.collapse.show{
+   /* display: none!important; */
+   transition: all 6000s ease-in-out;
+   flex-basis: 0!important;
 }
 button:focus{
    background-color:transparent;
@@ -36,14 +56,18 @@ button:focus{
 .switch-container{
    display:flex;
    align-items: center;
-   margin-right: 5px;
-   margin-left: 150px;
+   margin-right: 20px;
+   margin-left: 110px;
 }
 
 input[type=checkbox]{
 	height: 0;
 	width: 0;
 	visibility: hidden;
+}
+i.modal-trigger{
+   color: black;
+   width:70px;
 }
 
 #switch-label {
@@ -55,6 +79,33 @@ input[type=checkbox]{
 	display: block;
 	border-radius: 100px;
 	position: relative;
+}
+#modal1{
+   width: 300px!important;
+   left: 100px;
+   margin:0;
+   height:fit-content;
+   border-radius: .6rem;
+}
+.modal-content{
+   min-height: 300px;
+   background-color: transparent;
+   color: black;
+}
+.search-item{
+   float: none;
+   box-shadow: 0 0 2px rgba(131, 131, 131, 0.596);
+   padding:0 10px;
+   height: 30px;
+   line-height: 30px;
+
+}
+input#search:focus{
+   border-bottom-color: rgba(131, 131, 131, 0.596)!important;
+}
+.search-item:hover{
+   transform: scale(1.02);
+   transition: transform 0.3s ease-in-out;
 }
 
 #switch-label:after {
@@ -83,6 +134,13 @@ input:checked + #switch-label:after {
    right: 100%;
 	transform: translateX(-100%);
 }
-
+.white-bg{
+   background-color: rgba(255, 255, 255, 0.664)!important;
+}
+.search{
+   display: flex;
+   margin-left: 50px;
+   width: 50px;
+}
 
 

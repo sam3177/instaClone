@@ -1,16 +1,20 @@
-import React, { useContext } from 'react';
+import React, {
+	useContext,
+	useEffect
+} from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
-import {useHistory} from 'react-router-dom'
-
+import { useHistory } from 'react-router-dom';
 
 import { UserContext } from '../contexts/UserContext';
 import { ThemeContext } from '../contexts/ThemeContext';
 
+import SearchUser from './SearchUser'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Navbar.css';
 
-const NavBar = ({ classes }) => {
-	const history = useHistory()
+const NavBar = () => {
+	
+	const history = useHistory();
 	const { state, dispatch } = useContext(
 		UserContext
 	);
@@ -22,12 +26,15 @@ const NavBar = ({ classes }) => {
 		localStorage.removeItem('loggedUser');
 		localStorage.removeItem('token');
 		dispatch({ type: 'CLEAR' });
-		history.push('/login')
+		history.push('/login');
 	};
 	const changeTheme = () => {
-		localStorage.setItem('isDarkTheme', !isDarkTheme)
+		localStorage.setItem(
+			'isDarkTheme',
+			!isDarkTheme
+		);
 		toggleTheme();
-	}
+	};
 
 	return (
 		<Navbar
@@ -45,14 +52,31 @@ const NavBar = ({ classes }) => {
 			>
 				Instagram
 			</Navbar.Brand>
-						<div className="switch-container">
-						<input type="checkbox" id="switch" onClick={changeTheme}/>
-						<label id="switch-label" htmlFor="switch"></label>
-						</div>
-			<Navbar.Toggle aria-controls="basic-navbar-nav" />
+			<div className="switch-container">
+				<input
+					type="checkbox"
+					id="switch"
+					onClick={changeTheme}
+				/>
+				<label
+					id="switch-label"
+					htmlFor="switch"
+				/>
+			</div>
+			<SearchUser/>
+			<Navbar.Toggle
+				className={isDarkTheme && 'white-bg'}
+				aria-controls="basic-navbar-nav"
+			/>
 			<Navbar.Collapse id="basic-navbar-nav">
 				{
-					state ? <Nav className="mr-auto right">
+					state ? <Nav
+						className={
+
+								isDarkTheme ? 'mr-auto right dark-primary' :
+								'mr-auto right'
+						}
+					>
 						<Nav.Link href="/posts/following">
 							Feed
 						</Nav.Link>
@@ -77,10 +101,6 @@ const NavBar = ({ classes }) => {
 							Signup
 						</Nav.Link>
 					</Nav>}
-				{/* <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-success">Search</Button>
-    </Form> */}
 			</Navbar.Collapse>
 		</Navbar>
 	);

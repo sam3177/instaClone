@@ -24,12 +24,13 @@
    transition: background 100ms ease-in-out;
    cursor: pointer;
 }
-.post-options a{
+.post-options a, post-options a:hover{
    text-decoration: none;
-   color: inherit;
+   color: black!important;
 }
 .post-options li:hover{
    background-color:rgba(173, 173, 173, 0.493);
+   color: inherit;
 }
 .post{
    margin:10px;
@@ -79,7 +80,7 @@ padding-top:5px;
    background-color: rgba(173, 173, 173, 0.493);
 }
 .disabled{
-   color:grey;
+   /* color:grey; */
    cursor: not-allowed!important;
 }
 .post-content{

@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import React, {
+	useState,
+	useContext
+} from 'react';
+import {
+	useHistory,
+	useParams
+} from 'react-router-dom';
 import M from 'materialize-css';
 import axios from 'axios';
 
+import { ThemeContext } from '../../contexts/ThemeContext';
+
 const NewPasswordForm = () => {
+	const { isDarkTheme } = useContext(
+		ThemeContext
+	);
 	const history = useHistory();
-   const {token} = useParams()
+	const { token } = useParams();
 	const [ password, setPassword ] = useState('');
 	const [ passwordC, setPasswordC ] = useState(
 		''
@@ -44,8 +55,14 @@ const NewPasswordForm = () => {
 	};
 	return (
 		<div>
-			<div className="centered-container">
-				<div className="card formContent">
+			<div
+				className={
+
+						isDarkTheme ? 'centered-container dark-cards' :
+						'centered-container'
+				}
+			>
+				<div className={isDarkTheme ? 'card formContent dark-cards' : "card formContent"}>
 					<h3>Write your new password</h3>
 					<form
 						className="col s12"
